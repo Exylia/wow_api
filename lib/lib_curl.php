@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Envoie la requete a l'api et retourne sa reponse
  * @param  string   $method     Methode utiliser pour l'envoi de la requete (GET, POST, DELETE, PUT)
