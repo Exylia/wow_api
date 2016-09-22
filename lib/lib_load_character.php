@@ -8,7 +8,7 @@ require_once 'lib_wow_item.php';
 define('CFG_TABLE_CHARACTER', 'character');
 
 $server = 'Uldaman';
-$character_name = 'Huanna';
+$character_name = 'Ghiblik';
 
 $method = 'GET';
 $url = 'https://eu.api.battle.net/wow/character/' . $server . '/' . $character_name . '?fields=items,stats&local=' . CFG_LOCAL . '&apikey=' . CFG_API_KEY;
@@ -32,5 +32,5 @@ $sql.= 'region  = \'EU\'';
 
 
 echo '<pre>';
-var_dump($sql);
+var_dump($character['stats']);
 echo '</pre>';
