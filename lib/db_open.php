@@ -7,4 +7,4 @@ define('CFG_DB_PASS', 'password');  // Mot de passe de la base de données
 define('CFG_TABLE_CHARACTER',       'character');
 define('CFG_TABLE_CHARACTER_STATS', 'character_stats');
 
-$pdo = new PDO('mysql:host=' . CFG_DB_HOST . ';dbname=' . CFG_DB_NAME, CFG_DB_USER, CFG_DB_PASS);
+$pdo = new PDO('mysql:host=' . CFG_DB_HOST . ';dbname=' . CFG_DB_NAME, CFG_DB_USER, CFG_DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));

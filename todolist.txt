@@ -1,0 +1,2 @@
+- Encoding entre API et DB
+- Gestion erreur si API retourne erreur

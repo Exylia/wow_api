@@ -25,6 +25,8 @@ if (!empty($_GET)) {
 
         $character = (array) $guild_members_json;
 
+        var_dump($character);
+
         $sql = 'SELECT * FROM `' . CFG_TABLE_CHARACTER . '` ';
         $sql.= 'WHERE ';
         $sql.= 'realm = ' . $pdo->quote($_GET['server']) . ' AND ';
@@ -34,7 +36,7 @@ if (!empty($_GET)) {
 
         $character_id = '';
 
-        // Le personnage existe deja dans la base -> mise à jour
+        // Le personnage existe deja dans la table character-> mise à jour
         if ($result) {
             $character_id = $result['character_id'];
 
@@ -50,7 +52,10 @@ if (!empty($_GET)) {
             $sql.= 'WHERE ';
             $sql.= 'character_id = ' . $pdo->quote($character_id);
 
+            $pdo->query($sql);
+
         } else {
+
             $sql = 'INSERT INTO `' . CFG_TABLE_CHARACTER . '` SET ';
             $sql.= 'name    = \'' . $character['name']    . '\', ';
             $sql.= 'realm   = \'' . $character['realm']   . '\', ';
@@ -60,28 +65,51 @@ if (!empty($_GET)) {
             $sql.= 'gender  = \'' . $character['gender']  . '\', ';
             $sql.= 'level   = \'' . $character['level']   . '\', ';
             $sql.= 'region  = \'EU\'';
+
+            $pdo->query($sql);
+
+            // Recuperation de l'id
+            $character_id = $pdo->lastInsertId();
+
         }
-
-
-
-
 
         $character_stats = $character['stats'];
 
-        $sql = 'INSERT INTO ' . CFG_TABLE_CHARACTER_STATS . ' SET ';
-        $sql.= 'character_id = 1, ';
+        $sql = 'SELECT * FROM `' . CFG_TABLE_CHARACTER_STATS . '` ';
+        $sql.= 'WHERE ';
+        $sql.= 'character_id = ' . $pdo->quote($character_id);
 
-        foreach ($character_stats as $key => $value) {
-            $sql.= '`' . $key . '` = \'' . $value . '\', ';
+        $result = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+        var_dump($result);
+
+        // Personnage existe deja
+        if ($result) {
+
+            $sql = 'UPDATE ' . CFG_TABLE_CHARACTER_STATS . ' SET ';
+
+            foreach ($character_stats as $key => $value) {
+                $sql.= '`' . $key . '` = \'' . $value . '\', ';
+            }
+
+            $sql = substr($sql, 0, -2);
+
+            $pdo->query($sql);
+
+        } else {
+
+            $sql = 'INSERT INTO ' . CFG_TABLE_CHARACTER_STATS . ' SET ';
+            $sql.= 'character_id = ' . $pdo->quote($character_id) . ', ';
+
+            foreach ($character_stats as $key => $value) {
+                $sql.= '`' . $key . '` = \'' . $value . '\', ';
+            }
+
+            $sql = substr($sql, 0, -2);
+
+            $pdo->query($sql);
         }
-
-        print_r($sql);
-
-        echo '<pre>';
-        var_dump($character['stats']);
-        echo '</pre>';
     }
-
 }
 
 ?>
