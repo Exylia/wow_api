@@ -4,6 +4,7 @@ require_once 'lib_curl.php';
 require_once 'lib_wow_character.php';
 require_once 'lib_wow_guild.php';
 require_once 'lib_wow_item.php';
+require_once 'utils.php';
 
 if (!empty($_GET)) {
     if (empty($_GET['server'])) {
@@ -16,16 +17,11 @@ if (!empty($_GET)) {
 
     if (empty($form_error)) {
 
-        $method = 'GET';
-        $url = 'https://eu.api.battle.net/wow/character/' . $_GET['server'] . '/' . $_GET['character_name'] . '?fields=items,stats&local=' . CFG_LOCAL . '&apikey=' . CFG_API_KEY;
+        $character = (array) getCharacterAllInformations($_GET['server'], $_GET['character_name']);
 
-        $response = sendRestRequest($method, $url);
+        var_dump_utils($character);
 
-        $guild_members_json = json_decode($response['body'], true);
-
-        $character = (array) $guild_members_json;
-
-        var_dump($character);
+        exit;
 
         $sql = 'SELECT * FROM `' . CFG_TABLE_CHARACTER . '` ';
         $sql.= 'WHERE ';
