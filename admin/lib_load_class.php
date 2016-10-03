@@ -1,7 +1,6 @@
 <?php
 
-require_once 'db_open.php';
-require_once 'lib/wow_api/wow_api_loader.php';
+require_once 'start_php.php';
 
 $classes = getListClasses();
 
