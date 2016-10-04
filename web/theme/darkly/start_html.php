@@ -12,16 +12,9 @@
                     <a class="navbar-brand" href="#"> WoW_API </a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Roster</a></li>
-                        <li><a href="#">Guilde</a></li>
-                    </ul>
+                    <?php echo html_menu_top() ?>
                 </div>
             </div>
         </nav>
 
-        <div class="container-fuild">
-            <div class="col-md-12">
-                Contenu
-            </div>
-        </div>
+        <div class="container">
