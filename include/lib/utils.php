@@ -6,4 +6,9 @@ function var_dump_utils($var) {
     echo '</pre>';
 }
 
+function redirect($url) {
+    header('Location: ' . $url);
+    exit();
+}
+
 ?>

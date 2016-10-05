@@ -2,7 +2,7 @@
 $navigation_top = array(
     array(
         'name' => 'Roster',
-        'url' => CFG_PATH_HTTP . '/admin/rosters.php',
+        'url' => CFG_PATH_HTTP . '/admin/rosters/index.php',
     ),
     array(
         'name' => 'Guilde',
