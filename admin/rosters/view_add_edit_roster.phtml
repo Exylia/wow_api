@@ -1,0 +1,37 @@
+<?php
+
+$data = array(
+    'name' => ''
+);
+
+$data = array_merge($data, (!empty($roster) ? $roster : array()));
+
+$form_roster = array(
+    array(
+        'id'    => 'name',
+        'type'  => 'text',
+        'class' => 'form-control',
+        'label' => 'Nom du roster : ',
+        'value' => $data['name'],
+    ),
+    array(
+        'id'    => 'btn-submit',
+        'type'  => 'submit',
+        'value' => 'Envoyer',
+        'class' => 'btn btn-primary pull-right',
+    ),
+);
+
+
+?>
+
+<?php require_once 'start_html.php'; ?>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <?php echo generate_form_html($form_roster); ?>
+    </div>
+</div>
+
+
+<?php require_once 'stop_html.php'; ?>

@@ -2,7 +2,6 @@
 // Controleur
 require_once 'start_php.php';
 
-
 if (empty($_GET['action'])) {
     $rosters = get_rosters();
 
