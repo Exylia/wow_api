@@ -1,0 +1,81 @@
+<?php require_once 'start_html.php'; ?>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 text-center">
+        <h1><?php echo $roster['name']; ?></h1>
+    </div>
+</div>
+
+<div class="row">
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 clearfix">
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-add-character">Ajouter</button>
+    </div>
+</div>
+
+<!-- Modal Add Character-->
+<div class="modal fade" id="modal-add-character" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un personnage</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <form class="form" id="form-add-character">
+                        <div class="form-group col-md-6">
+                            <select name="realm" class="form-control">
+                                <?php foreach ($realms as $realm): ?>
+                                    <option value="<?php echo $realm['name'] ?>">
+                                        <?php echo $realm['name'] ?>
+                                    </option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <input type="text" value="" name="name" class="form-control">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" id="btn-add-character">Ajouter le personnage</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#btn-add-character').on('click', function() {
+            var data = $('#form-add-character').serialize();
+
+            // Chargement du personnage par Ajax
+            $.ajax(
+                url : 'MyUrlToLoadCharacter',
+                type : 'POST',
+                data : data,
+                success : function(response, statut) {
+
+                }
+                error : function(response, statut, error) {
+
+                }
+                complete : function(resultat, statut) {
+
+                }
+            );
+            $('#modal-add-character').modal('hide');
+        });
+    });
+</script>
+
+<?php require_once 'stop_html.php'; ?>
