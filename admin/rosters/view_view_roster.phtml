@@ -59,20 +59,21 @@
             var data = $('#form-add-character').serialize();
 
             // Chargement du personnage par Ajax
-            $.ajax(
-                url : 'MyUrlToLoadCharacter',
-                type : 'POST',
-                data : data,
-                success : function(response, statut) {
+            $.ajax({
+                url: 'ajax/ajax_load_character.php',
+                type: 'POST',
+                data: data,
+                success: function(response, statut) {
 
-                }
+                },
                 error : function(response, statut, error) {
 
-                }
+                },
                 complete : function(resultat, statut) {
 
-                }
-            );
+                },
+            });
+
             $('#modal-add-character').modal('hide');
         });
     });
