@@ -42,6 +42,9 @@
                         </div>
                     </form>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 hidden" id="add-character-error-message"/>
+                </div>
 
             </div>
 
@@ -64,17 +67,26 @@
                 type: 'POST',
                 data: data,
                 success: function(response, statut) {
-
+                    console.log('success');
                 },
                 error : function(response, statut, error) {
+                    // Case of fail
+                    switch (response.status) {
+                        case 422:
+                            $('[name=realm]').closest('.form-group').addClass('has-error');
+                            $('[name=name]').closest('.form-group').addClass('has-error');
 
+                            $('#add-character-error-message').text('Champs obligatoires');
+                            $('#add-character-error-message').removeClass('hidden');
+                            break;
+                    }
                 },
                 complete : function(resultat, statut) {
 
                 },
             });
 
-            $('#modal-add-character').modal('hide');
+            // $('#modal-add-character').modal('hide');
         });
     });
 </script>

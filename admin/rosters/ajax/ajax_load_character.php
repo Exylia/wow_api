@@ -16,6 +16,11 @@ require_once 'lib/wow_api/wow_api_loader.php';
 // Recuperation des informations du personnage
 $character = (array) getCharacterAllInformations($_POST['realm'], $_POST['name']);
 
+if (!empty($character['status']) && $character['status'] === 'nok') {
+    header('HTTP/1.1 404');
+    die(json_encode(array('error' => $character['reason'])));
+}
+
 //
 // Error personnage introuvable a gerer ici !
 //
@@ -77,8 +82,6 @@ $sql.= 'character_id = ' . $pdo->quote($character_id);
 
 $result = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-var_dump($result);
-
 // Stat deja presente -> mise à jour
 if ($result) {
 
@@ -105,4 +108,8 @@ if ($result) {
 
     $pdo->query($sql);
 }
+
+echo json_encode(array('character_id' => $character_id));
+
+require_once 'stop_php.php';
 ?>
