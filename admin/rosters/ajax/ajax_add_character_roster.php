@@ -6,7 +6,7 @@ require_once 'start_php.php';
 header('Content-Type: application/json; charset=UTF-8');
 
 // S'il manque des arguments
-if (empty($_POST) || empty($_POST['realm']) || empty($_POST['name'])) {
+if (empty($_POST) || empty($_POST['realm']) || empty($_POST['name']) || empty($_POST['roster_id'])) {
     header('HTTP/1.1 422 Missing arguments');
     die(json_encode(array('error' => 'Missing arguments')));
 }
@@ -108,6 +108,22 @@ if ($result) {
 
     $pdo->query($sql);
 }
+
+$sql = 'SELECT * FROM ' .CFG_TABLE_ROSTER_CHARACTER . ' ';
+$sql.= 'WHERE ';
+$sql.= 'roster_id = ' . $pdo->quote($_POST['roster_id']) . ' AND ';
+$sql.= 'character_id = ' . $pdo->quote($character_id);
+
+if ($pdo->query($sql)->fetch(PDO::FETCH_ASSOC)) {
+    header('HTTP/1.1 409');
+    die(json_encode(array('error' => 'Character already exists in roster')));
+}
+
+$sql = 'INSERT INTO ' . CFG_TABLE_ROSTER_CHARACTER . ' SET ';
+$sql.= 'roster_id = ' . $pdo->quote($_POST['roster_id']) . ', ';
+$sql.= 'character_id = ' . $pdo->quote($character_id);
+
+$pdo->query($sql);
 
 echo json_encode(array('character_id' => $character_id));
 

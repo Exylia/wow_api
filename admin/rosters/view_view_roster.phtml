@@ -7,6 +7,23 @@
 </div>
 
 <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table">
+            <?php foreach ($roster_characters as $key => $character) : ?>
+                <tr>
+                    <td class="col-md-2"><?php echo $character['name']; ?></td>
+
+                    <td class="col-md-1"><?php echo $character['level']; ?></td>
+
+                    <td class="col-md-7">&nbsp;</td>
+
+                    <td class="col-md-1"><?php echo $character['class']; ?></td>
+
+                    <td class="col-md-1"><?php echo $character['race']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
 </div>
 
 <div class="row">
@@ -27,6 +44,7 @@
             <div class="modal-body">
                 <div class="row">
                     <form class="form" id="form-add-character">
+                        <input type="hidden" name="roster_id" value="<?php echo $_GET['id'] ?>">
                         <div class="form-group col-md-6">
                             <select name="realm" class="form-control">
                                 <?php foreach ($realms as $realm): ?>
@@ -63,11 +81,13 @@
 
             // Chargement du personnage par Ajax
             $.ajax({
-                url: 'ajax/ajax_load_character.php',
+                url: 'ajax/ajax_add_character_roster.php',
                 type: 'POST',
                 data: data,
                 success: function(response, statut) {
-                    console.log('success');
+                    // Update list à faire
+                    $('#modal-add-character').modal('hide');
+
                 },
                 error : function(response, statut, error) {
                     // Case of fail
@@ -76,7 +96,15 @@
                             $('[name=realm]').closest('.form-group').addClass('has-error');
                             $('[name=name]').closest('.form-group').addClass('has-error');
 
-                            $('#add-character-error-message').text('Champs obligatoires');
+                            $('#add-character-error-message').text('Champs obligatoires manquants');
+                            $('#add-character-error-message').removeClass('hidden');
+                            break;
+                        case 404:
+                            $('#add-character-error-message').text('Personnage introuvable');
+                            $('#add-character-error-message').removeClass('hidden');
+                            break;
+                        case 409:
+                            $('#add-character-error-message').text('Personnage déjà présent dans le roster');
                             $('#add-character-error-message').removeClass('hidden');
                             break;
                     }
@@ -85,8 +113,6 @@
 
                 },
             });
-
-            // $('#modal-add-character').modal('hide');
         });
     });
 </script>
