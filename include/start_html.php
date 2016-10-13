@@ -1,3 +1,3 @@
 <?php
-    require dirname(__FILE__) . '/../web/theme/darkly/start_html.php';
+    require dirname(__FILE__) . '/../view/start_html.php';
 ?>
