@@ -3,19 +3,19 @@ require_once 'start_php.php';
 
 if (!empty($_POST)) {
     if (empty($_POST['username'])) {
-        $error['username'] = "Champ requis";
+        $error['username'] = 'Nom d\'utilisateur : champ requis';
     }
 
     if (empty($_POST['email'])) {
-        $error['email'] = "Champ requis";
+        $error['email'] = 'Adresse email : Champ requis';
     }
 
     if (empty($_POST['password'])) {
-        $error['password'] = "Champ requis";
+        $error['password'] = 'Mot de passe : champ requis';
     }
 
     if (empty($_POST['password_confirm'])) {
-        $error['password_confirm'] = "Champ requis";
+        $error['password_confirm'] = 'Confirmation mot de passe : champ requis';
     }
 
     // Verification doublon username
@@ -24,29 +24,29 @@ if (!empty($_POST)) {
     $sql.= 'username = ' . $pdo->quote($_POST['username']);
 
     if ($pdo->query($sql)->fetch(PDO::FETCH_ASSOC)) {
-        $error['username'] = 'Ce nom d\'utilisateur existe deja';
+        $error['username'] = 'Nom d\'utilisateur : ce nom existe deja';
     }
 
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $error['email'] = 'L\'adresse email n\'est pas valide';
+        $error['email'] = 'Adresse email : l\'adresse email n\'est pas valide';
     } else {
-        // verification doublon email
         $sql = 'SELECT * FROM ' . CFG_TABLE_USER . ' ';
+        // verification doublon email
         $sql.= 'WHERE ';
         $sql.= 'email = ' . $pdo->quote($_POST['email']);
 
         if ($pdo->query($sql)->fetch(PDO::FETCH_ASSOC)) {
-            $error['email'] = 'Cette adresse email est deja utilisee';
+            $error['email'] = 'Adresse email : cette adresse email existe deja';
         }
     }
 
     $password_pattern = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/';
     if (preg_match($password_pattern, $_POST['password']) <= 0) {
-        $error['password'] = 'Le mot de passe doit contenir 8 character';
+        $error['password'] = 'Mot de passe :  le mot de passe doit contenir 8 character';
     }
 
     if ($_POST['password_confirm'] !== $_POST['password']) {
-        $error['password_confirm'] = 'Le mot de passe ne correspond pas';
+        $error['password_confirm'] = 'Confirmation mot de passe : le mot de passe ne correspond pas';
     }
 
     if (empty($error)) {
@@ -65,4 +65,4 @@ require_once 'stop_php.php';
 
 require_once 'view/signup.phtml';
 
- ?>
+?>

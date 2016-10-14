@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <link rel="stylesheet" href="/wow_api/web/css/bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="/wow_api/web/theme/darkly/css/bootstrap.css" type="text/css">
         <link rel="stylesheet" href="/wow_api/web/css/global.css" type="text/css">
         <script src="/wow_api/web/js/jquery-3.1.1.min.js"></script>
         <script src="/wow_api/web/js/bootstrap.min.js"></script>
