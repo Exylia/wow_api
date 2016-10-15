@@ -2,7 +2,7 @@
 require_once 'start_php.php';
 
 if (empty($_GET['id'])) {
-    redirect(CFG_PATH_HTTP . '/admin/rosters/index.php');
+    redirect(CFG_PATH_HTTP . '/roster/index.php');
 }
 
 if (!empty($_POST)) {
@@ -35,7 +35,7 @@ $roster_characters = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 // Recuperation de la liste des serveurs
 $realms = getRealm();
 
-require_once 'view_view_roster.phtml';
+require_once CFG_PATH_FILE . '/view/roster/view_roster.phtml';
 
 require_once 'stop_php.php';
 

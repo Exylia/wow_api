@@ -11,7 +11,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"> WoW_API </a>
+                    <a class="navbar-brand" href="<?php echo CFG_PATH_HTTP . '/index.php' ?>"> WoW_API </a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <?php echo html_menu_top() ?>

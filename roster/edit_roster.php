@@ -2,7 +2,7 @@
 require_once 'start_php.php';
 
 if (empty($_GET['id'])) {
-    redirect(CFG_PATH_HTTP . '/admin/rosters/index.php');
+    redirect(CFG_PATH_HTTP . '/rosters/index.php');
 }
 
 if (!empty($_POST)) {
@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 
         $pdo->query($sql);
 
-        redirect(CFG_PATH_HTTP . '/admin/rosters/index.php');
+        redirect(CFG_PATH_HTTP . '/roster/index.php');
     }
 }
 
@@ -29,7 +29,7 @@ $sql.= 'roster_id = ' . $pdo->quote($_GET['id']) . '';
 
 $roster = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-require_once 'view_add_edit_roster.phtml';
+require_once CFG_PATH_FILE . '/view/roster/add_edit_roster.phtml';
 
 require_once 'stop_php.php';
 

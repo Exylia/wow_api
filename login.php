@@ -23,7 +23,7 @@ if (!empty($_POST)) {
 		} else {
 			session_start();
 			$_SESSION['user_id'] = $user['user_id'];
-			$_SESSION['acl'] = (!empty($user['acl']) ? $user['acl'] : '');
+			$_SESSION['acl'] = (!empty($user['acl']) ? explode('|', $user['acl']) : array('member'));
 			session_regenerate_id();
 			redirect(CFG_PATH_HTTP . '/index.php');
 		}

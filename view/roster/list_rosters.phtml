@@ -12,9 +12,9 @@
                 <tr>
                     <td class="col-md-10"><?php echo $roster['name'] ?></td>
                     <td class="col-md-2">
-                        <a href="<?php echo CFG_PATH_HTTP . '/admin/rosters/view_roster.php?id=' . $roster['roster_id'] ?>">Voir</a>
-                        <a href="<?php echo CFG_PATH_HTTP . '/admin/rosters/edit_roster.php?id=' . $roster['roster_id'] ?>">Edit</a>
-                        <a href="<?php echo CFG_PATH_HTTP . '/admin/rosters/index.php?action=del&id='  . $key ?>">Supprimer</a>
+                        <a href="<?php echo CFG_PATH_HTTP . '/roster/view_roster.php?id=' . $roster['roster_id'] ?>">Voir</a>
+                        <a href="<?php echo CFG_PATH_HTTP . '/roster/edit_roster.php?id=' . $roster['roster_id'] ?>">Edit</a>
+                        <a href="<?php echo CFG_PATH_HTTP . '/roster/index.php?action=del&id='  . $key ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
