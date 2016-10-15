@@ -2,16 +2,19 @@
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <ul>
-                <?php foreach ($error as $key => $value) : ?>
-                    <li> <?php echo $value ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+        <?php if (!empty($error)) : ?>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <ul>
+                    <?php foreach ($error as $key => $value) : ?>
+                        <li> <?php echo $value ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+        
         <form class="form-horizontal clearfix" action="" method="POST">
             <div class="form-group <?php echo (!empty($error['username']) ? 'has-error' : '') ?>">
                 <label for="username" class="col-md-2 control-label">Nom d'utilisateur</label>

@@ -22,6 +22,9 @@ if (!empty($_POST)) {
 			$error[] = 'Utilisateur et/ou mot de passe incorrect';
 		} else {
 			session_start();
+			$_SESSION['user_id'] = $user['user_id'];
+			$_SESSION['acl'] = (!empty($user['acl']) ? $user['acl'] : '');
+			session_regenerate_id();
 			redirect(CFG_PATH_HTTP . '/index.php');
 		}
 	}
