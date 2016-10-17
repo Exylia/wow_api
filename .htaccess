@@ -1,1 +1,1 @@
-php_value   include_path    C:\wamp64\www\wow_api\include;.
+php_value   include_path    /var/www/html/wow_api/include:.

@@ -28,8 +28,27 @@ $form_roster = array(
 <?php require_once 'start_html.php'; ?>
 
 <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <?php echo generate_form_html($form_roster); ?>
+    <div class="col-md-10 col-md-offset-1 well">
+        <form class="form-horizontal clearfix" action="" method="POST">
+            <div class="form-group">
+                <label for="name" class="col-md-2 control-label">Nom du roster</label>
+                <div class="col-md-10">
+                    <input
+                        name="name"
+                        type="text"
+                        value="<?php echo (!empty($roster['name']) ? $roster['name'] : '') ?>"
+                        class="form-control"
+                        placeholder="Nom du roster"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <button type="submit" class="btn btn-primary pull-right">Ajouter</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

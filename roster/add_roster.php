@@ -13,6 +13,15 @@ if (!empty($_POST)) {
 
         $pdo->query($sql);
 
+        $roster_id = $pdo->lastInsertId();
+
+        $sql = 'INSERT INTO ' . CFG_TABLE_ROSTER_USER . ' SET ';
+        $sql.= 'roster_id = ' . $pdo->quote($roster_id)             . ', ';
+        $sql.= 'user_id   = ' . $pdo->quote($_SESSION['user_id'])   . ', ';
+        $sql.= 'admin = 1';
+
+        $pdo->query($sql);
+
         redirect(CFG_PATH_HTTP . '/roster/index.php');
     }
 }

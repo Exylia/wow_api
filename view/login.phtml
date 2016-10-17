@@ -14,16 +14,16 @@
 	            </ul>
 	        </div>
 	    <?php endif;?>
-	    
+
 		 <form class="form-horizontal clearfix" action="" method="POST">
             <div class="form-group">
                 <label for="username" class="col-md-2 control-label">Nom d'utilisateur</label>
                 <div class="col-md-10">
-                    <input 
-                    	name="username" 
-                    	type="text" 
-                    	value="<?php echo (!empty($_POST['username']) ? $_POST['username'] : '') ?>" 
-                    	class="form-control" 
+                    <input
+                    	name="username"
+                    	type="text"
+                    	value="<?php echo (!empty($_POST['username']) ? $_POST['username'] : '') ?>"
+                    	class="form-control"
                     	placeholder="Nom d'utilisateur"
                     >
                 </div>
@@ -31,11 +31,11 @@
             <div class="form-group">
                 <label for="password" class="col-md-2 control-label">Mot de passe</label>
                 <div class="col-md-10">
-                    <input 
-                    	name="password" 
-                    	type="password" 
-                    	value="<?php echo (!empty($_POST['password']) ? $_POST['password'] : '') ?>" 
-                    	class="form-control" 
+                    <input
+                    	name="password"
+                    	type="password"
+                    	value="<?php echo (!empty($_POST['password']) ? $_POST['password'] : '') ?>"
+                    	class="form-control"
                     	placeholder="Mot de passe"
                     >
                 </div>
@@ -50,4 +50,4 @@
 	</div>
 </div>
 
-<?php require_once 'stOP_html.php'; ?>
+<?php require_once 'stop_html.php'; ?>

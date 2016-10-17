@@ -23,6 +23,16 @@ $navigation_top_right = array(
         'url'  => CFG_PATH_HTTP . '/logout.php',
         'acl'  => 'member',
     ),
+    array(
+        'name' => 'Connexion',
+        'url'  => CFG_PATH_HTTP . '/login.php',
+        'acl'  => '',
+    ),
+    array(
+        'name' => 'Inscription',
+        'url'  => CFG_PATH_HTTP . '/signup.php',
+        'acl'  => '',
+    ),
 );
 
 /**
@@ -47,7 +57,7 @@ function html_menu_top() {
     $html.= '<ul class="nav navbar-nav navbar-right">';
 
     foreach ($navigation_top_right as $key => $item) {
-        if (empty($item['acl']) || (!empty($_SESSION['acl']) && in_array($item['acl'], $_SESSION['acl']))) {
+        if ((empty($item['acl']) && empty($_SESSION['user_id'])) || (!empty($_SESSION['acl']) && in_array($item['acl'], $_SESSION['acl']))) {
             $html .= '<li><a href="' . $item['url'] . '">' . $item['name'] . '</a></li>';
         }
     }
