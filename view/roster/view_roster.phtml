@@ -7,27 +7,41 @@
 </div>
 
 <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <table class="table">
-            <?php foreach ($roster_characters as $key => $character) : ?>
+    <div class="col-md-10 col-md-offset-1 well">
+        <table class="table table-striped table-hover">
+            <thead>
                 <tr>
-                    <td class="col-md-2"><?php echo $character['name']; ?></td>
+                    <th class="col-md-2">Nom</th>
 
-                    <td class="col-md-1"><?php echo $character['level']; ?></td>
+                    <th class="col-md-1 text-center">Level</th>
 
-                    <td class="col-md-7">&nbsp;</td>
+                    <th class="col-md-7 text-center">&nbsp;</th>
 
-                    <td class="col-md-1"><?php echo $character['class']; ?></td>
+                    <th class="col-md-1 text-center">Classe</th>
 
-                    <td class="col-md-1"><?php echo $character['race']; ?></td>
+                    <!-- <th class="col-md-1">Race</th> -->
                 </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-</div>
+            </thead>
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-1 clearfix">
+            <tbody>
+                <?php foreach ($roster_characters as $key => $character) : ?>
+                    <tr>
+                        <td class="col-md-2 valign"><?php echo $character['name']; ?></td>
+
+                        <td class="col-md-1 text-center valign"><?php echo $character['level']; ?></td>
+
+                        <td class="col-md-8 valign">&nbsp;</td>
+
+                        <td class="col-md-1 text-center valign">
+                            <span class="classicon classicon-<?php echo $character['class_id'] ?>"></span>
+                        </td>
+
+                        <!-- <td class="col-md-1"><?php echo $character['race']; ?></td> -->
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-add-character">Ajouter</button>
     </div>
 </div>

@@ -22,6 +22,7 @@ $sql.= 'C.character_id, ';
 $sql.= 'C.name, ';
 $sql.= 'C.level, ';
 $sql.= 'CLASS.name as class, ';
+$sql.= 'CLASS.class_id as class_id, ';
 $sql.= 'RACE.name as race ';
 $sql.= 'FROM ' . CFG_TABLE_ROSTER_CHARACTER . ' RC ';
 $sql.= 'LEFT JOIN `' . CFG_TABLE_CHARACTER . '` C ON C.character_id = RC.character_id ';
