@@ -7,19 +7,19 @@
 </div>
 
 <div class="row">
-    <div class="col-md-10 col-md-offset-1 well">
-        <table class="table table-striped table-hover">
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
                     <th class="col-md-2">Nom</th>
 
                     <th class="col-md-1 text-center">Level</th>
 
+                    <th class="col-md-1 text-center">ilvl</th>
+
                     <th class="col-md-7 text-center">&nbsp;</th>
 
                     <th class="col-md-1 text-center">Classe</th>
-
-                    <!-- <th class="col-md-1">Race</th> -->
                 </tr>
             </thead>
 
@@ -30,13 +30,15 @@
 
                         <td class="col-md-1 text-center valign"><?php echo $character['level']; ?></td>
 
-                        <td class="col-md-8 valign">&nbsp;</td>
+                        <td class="col-md-1 text-center valign">
+                            <?php echo (!empty($character['ilvl']) ? view_ilvl($character['ilvl']) : 'n/a') ?>
+                        </td>
+
+                        <td class="col-md-7 valign">&nbsp;</td>
 
                         <td class="col-md-1 text-center valign">
                             <span class="classicon classicon-<?php echo $character['class_id'] ?>"></span>
                         </td>
-
-                        <!-- <td class="col-md-1"><?php echo $character['race']; ?></td> -->
                     </tr>
                 <?php endforeach; ?>
             </tbody>

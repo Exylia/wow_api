@@ -48,6 +48,12 @@ if ($result) {
     $sql.= 'race    = \'' . $character['race']    . '\', ';
     $sql.= 'gender  = \'' . $character['gender']  . '\', ';
     $sql.= 'level   = \'' . $character['level']   . '\', ';
+
+    // Recuperation du iLvl
+    if (!empty($character['items']) && !empty($character['items']['averageItemLevelEquipped'])) {
+        $sql.= 'ilvl = ' . $pdo->quote($character['items']['averageItemLevelEquipped']) . ', ';
+    }
+
     $sql.= 'region  = \'EU\' ';
     $sql.= 'WHERE ';
     $sql.= 'character_id = ' . $pdo->quote($character_id);
@@ -109,21 +115,19 @@ if ($result) {
     $pdo->query($sql);
 }
 
-$sql = 'SELECT * FROM ' .CFG_TABLE_ROSTER_CHARACTER . ' ';
+$sql = 'SELECT * FROM ' . CFG_TABLE_ROSTER_CHARACTER . ' ';
 $sql.= 'WHERE ';
 $sql.= 'roster_id = ' . $pdo->quote($_POST['roster_id']) . ' AND ';
 $sql.= 'character_id = ' . $pdo->quote($character_id);
 
-if ($pdo->query($sql)->fetch(PDO::FETCH_ASSOC)) {
-    header('HTTP/1.1 409');
-    die(json_encode(array('error' => 'Character already exists in roster')));
+if (!$pdo->query($sql)->fetch(PDO::FETCH_ASSOC)) {
+    $sql = 'INSERT INTO ' . CFG_TABLE_ROSTER_CHARACTER . ' SET ';
+    $sql.= 'roster_id = ' . $pdo->quote($_POST['roster_id']) . ', ';
+    $sql.= 'character_id = ' . $pdo->quote($character_id);
+
+    $pdo->query($sql);
 }
 
-$sql = 'INSERT INTO ' . CFG_TABLE_ROSTER_CHARACTER . ' SET ';
-$sql.= 'roster_id = ' . $pdo->quote($_POST['roster_id']) . ', ';
-$sql.= 'character_id = ' . $pdo->quote($character_id);
-
-$pdo->query($sql);
 
 echo json_encode(array('character_id' => $character_id));
 

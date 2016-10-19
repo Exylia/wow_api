@@ -23,3 +23,25 @@ function get_rosters($user_id) {
 
     return $rosters;
 }
+
+function view_ilvl($ilvl, $required_ilvl = 840) {
+    if ($ilvl >= $required_ilvl -5 && $ilvl <= $required_ilvl + 5) {
+        return '<span class="color-green">' . $ilvl . '</span>';
+    }
+
+    if ($ilvl < $required_ilvl - 5 && $ilvl > $required_ilvl - 10) {
+        return '<span class="color-grey">' . $ilvl . '</span>';
+    }
+
+    if ($ilvl <= $required_ilvl - 10) {
+        return '<span class="color-blue">' . $ilvl . '</span>';
+    }
+
+    if ($ilvl > $required_ilvl + 5 && $ilvl < $required_ilvl + 10) {
+        return '<span class="color-red">' . $ilvl . '</span>';
+    }
+
+    if ($ilvl >= $required_ilvl + 10) {
+        return '<span class="color-purple">' . $ilvl . '</span>';
+    }
+}

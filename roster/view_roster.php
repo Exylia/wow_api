@@ -21,6 +21,7 @@ $sql = 'SELECT ';
 $sql.= 'C.character_id, ';
 $sql.= 'C.name, ';
 $sql.= 'C.level, ';
+$sql.= 'C.ilvl, ';
 $sql.= 'CLASS.name as class, ';
 $sql.= 'CLASS.class_id as class_id, ';
 $sql.= 'RACE.name as race ';
