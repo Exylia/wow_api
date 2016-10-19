@@ -3,7 +3,7 @@
 <h3>A faire :</h3>
 
 <ul>
-	<li>Recuperation du iLvl</li>
+	<li><s>Recuperation du iLvl</s></li>
 	<li>Librairie Warcraft Log</li>
 	<li>Affichage des informations détaillés des personnages</li>
 	<li>Chargement d'une guilde complete</li>
