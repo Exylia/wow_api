@@ -1,0 +1,19 @@
+#Fichiers inutiles de windows, mac et linux
+*.db
+.DS_Store
+*~
+._*
+
+#Fichiers Eclipse
+.cache
+.settings
+.buildpath
+.project
+
+# fichiers pouvant contenir des configs
+/.user.ini
+/.htaccess
+/include/config/config_serveur.php
+
+# fichiers phing
+/build.properties
