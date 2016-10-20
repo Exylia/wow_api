@@ -1,6 +1,5 @@
 <?php
-define('CFG_PATH_FILE', realpath(dirname(__FILE__).'/../..'));
-define('CFG_PATH_HTTP', 'http://localhost/wow_api');
+require_once 'config_server.php';
 
 define('CFG_TABLE_USER',   'user'); // Table des utilisateurs
 define('CFG_TABLE_REALM',  'realm');  // Table des serveurs

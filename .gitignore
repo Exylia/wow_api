@@ -13,7 +13,7 @@
 # fichiers pouvant contenir des configs
 /.user.ini
 /.htaccess
-/include/config/config_serveur.php
+/include/config/config_server.php
 
 # fichiers phing
 /build.properties
