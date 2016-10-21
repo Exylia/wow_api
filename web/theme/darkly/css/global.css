@@ -3,15 +3,6 @@ body {
     margin-bottom : 80px;
 }
 
-.classicon {
-    background-image: url(../images/class_dark.png);
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-    background-repeat: no-repeat;
-    vertical-align: top;
-}
-
 .table-characters > thead > tr,
 .table-characters > tbody > tr {
     border-bottom:1px solid #444444;
@@ -25,6 +16,15 @@ body {
 .progress-roster-update .progress-bar {
     line-height: 20px;
     font-size: 14px;
+}
+
+.classicon {
+    background-image: url(../images/class_dark.png);
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    background-repeat: no-repeat;
+    vertical-align: top;
 }
 
 .classicon-1 {
@@ -79,7 +79,7 @@ body {
     vertical-align: middle !important;
 }
 
-.color-red {
+.color-danger {
     color: rgb(154,0,0);
 }
 
@@ -87,14 +87,14 @@ body {
     color : #666666;
 }
 
-.color-green {
+.color-uncommon {
     color: rgb(30, 255, 0);
 }
 
-.color-blue {
+.color-rare {
     color: rgb(0, 112, 255);
 }
 
-.color-purple {
+.color-epic {
     color: rgb(163, 53, 238);
 }
