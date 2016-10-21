@@ -12,6 +12,21 @@ body {
     vertical-align: top;
 }
 
+.table-characters > thead > tr,
+.table-characters > tbody > tr {
+    border-bottom:1px solid #444444;
+}
+
+.progress-roster-update {
+    border-radius: 0px;
+    height: 20px;
+}
+
+.progress-roster-update .progress-bar {
+    line-height: 20px;
+    font-size: 14px;
+}
+
 .classicon-1 {
     background-position: 0px -0px;
 }
