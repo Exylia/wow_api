@@ -31,7 +31,7 @@
                         <td class="col-md-1 text-center valign"><?php echo $character['level']; ?></td>
 
                         <td class="col-md-1 text-center valign">
-                            <?php echo (!empty($character['ilvl']) ? view_ilvl($character['ilvl']) : 'n/a') ?>
+                            <?php echo (!empty($character['ilvl']) ? view_ilvl($character['ilvl'], $roster['required_ilvl']) : 'n/a') ?>
                         </td>
 
                         <td class="col-md-7 valign">&nbsp;</td>

@@ -7,9 +7,14 @@ if (!empty($_POST)) {
         $error['name_roster'] = "Champ obligatoire";
     }
 
+    if (empty($_POST['required_ilvl'])) {
+        $error['required_ilvl'] = "Champ obligatoire";   
+    }
+
     if (empty($error)) {
         $sql = 'INSERT INTO ' . CFG_TABLE_ROSTER . ' SET ';
-        $sql.= 'name = ' . $pdo->quote($_POST['name']) . ' ';
+        $sql.= 'name = ' . $pdo->quote($_POST['name']) . ', ';
+        $sql.= 'required_ilvl = ' . $pdo->quote($_POST['required_ilvl']);
 
         $pdo->query($sql);
 

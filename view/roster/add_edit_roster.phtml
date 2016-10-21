@@ -1,27 +1,11 @@
 <?php
 
 $data = array(
-    'name' => ''
+    'name' => '',
+    'required_ilvl' => '840',
 );
 
 $data = array_merge($data, (!empty($roster) ? $roster : array()));
-
-$form_roster = array(
-    array(
-        'id'    => 'name',
-        'type'  => 'text',
-        'class' => 'form-control',
-        'label' => 'Nom du roster : ',
-        'value' => $data['name'],
-    ),
-    array(
-        'id'    => 'btn-submit',
-        'type'  => 'submit',
-        'value' => 'Envoyer',
-        'class' => 'btn btn-primary pull-right',
-    ),
-);
-
 
 ?>
 
@@ -39,6 +23,19 @@ $form_roster = array(
                         value="<?php echo (!empty($roster['name']) ? $roster['name'] : '') ?>"
                         class="form-control"
                         placeholder="Nom du roster"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-md-2 control-label">iLvl requis</label>
+                <div class="col-md-2">
+                    <input
+                        name="required_ilvl"
+                        type="number"
+                        value="<?php echo (!empty($roster['required_ilvl']) ? $roster['required_ilvl'] : '') ?>"
+                        class="form-control"
+                        placeholder="ILvl requis"
                     >
                 </div>
             </div>
