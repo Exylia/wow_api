@@ -98,3 +98,29 @@ body {
 .color-epic {
     color: rgb(163, 53, 238);
 }
+
+.character-thumbnail {
+    margin-right: 20px;
+}
+
+.character-name {
+    font-size: 22px;
+}
+
+.character-guild {
+    font-size: 18px;
+}
+
+.character-stats-table {
+    margin-bottom: 0px;
+}
+
+.character-ilvl-progress {
+    border-radius: 0px;
+    height: 20px;
+}
+
+.character-ilvl-progress .progress-bar {
+    line-height: 20px;
+    font-size: 14px;
+}

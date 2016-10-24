@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="/wow_api/web/theme/darkly/css/bootstrap.css" type="text/css">
         <link rel="stylesheet" href="/wow_api/web/theme/darkly/css/global.css" type="text/css">
         <script src="/wow_api/web/js/jquery-3.1.1.min.js"></script>
