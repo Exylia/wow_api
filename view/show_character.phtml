@@ -1,5 +1,9 @@
 <?php require_once 'start_html.php' ?>
 
+<pre>
+    <?php var_dump($character['stats']) ?>
+</pre>
+
 <div class="row">
     <div class="col-md-12">
         <div class="well">
@@ -26,6 +30,40 @@
 </div>
 
 <div class="row">
+    <div class="col-md-4">
+        <div class="well">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td width="100px">
+                            <span>Vie</span>
+                        </td>
+                        <td>
+                            <div class="progress character-ilvl-progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                    <?php echo $character['stats']['health'] ?>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="100px">
+                            <span><?php echo $character['stats']['powerType'] ?></span>
+                        </td>
+                        <td>
+                            <div class="progress character-ilvl-progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                    <?php echo $character['stats']['power'] ?>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="col-md-4">
         <div class="well">
             <table class="table table-condensed character-stats-table">
@@ -117,39 +155,18 @@
             </table>
         </div>
     </div>
-
-    <div class="col-md-4">
-        <div class="well">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td width="100px">
-                            <span>ilvl</span>
-                        </td>
-                        <td>
-                            <div class="progress character-ilvl-progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                    60%
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 
 <div class="row">
     <div class="col-md-6">
         <div class="well">
-
+            <span>Graph kill boss raid 1</span>
         </div>
     </div>
 
     <div class="col-md-6">
         <div class="well">
-
+            <span>Graph kill boss raid 2</span>
         </div>
     </div>
 </div>
