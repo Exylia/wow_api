@@ -1,2 +1,46 @@
 <?php require_once 'start_html.php' ?>
+
+<div class="row">
+    <?php if (!empty($error)) : ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                <?php foreach ($error as $key => $value) : ?>
+                    <li> <?php echo $value ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif;?>
+
+    <div class="col-md-6 col-md-offset-3 well">
+        <form class="form-horizontal clearfix" method="GET" action="">
+            <div class="form-group <?php echo (!empty($error['realm']) ? 'has-error' : '') ?>">
+                <label class="control-label col-md-2" for="realm">Serveur</label>
+                <div class="col-md-10">
+                    <select name="realm" class="form-control col-md-10">
+                        <?php foreach (getRealm() as $realm) : ?>
+                            <option value="<?php echo $realm['name']?>"><?php echo $realm['name']?></option>
+
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group <?php echo (!empty($error['name']) ? 'has-error' : '') ?>">
+                <label class="control-label col-md-2" for="name">Nom</label>
+                <div class="col-md-10">
+                    <input type="text" value="" name="name" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                <button class="btn btn-block btn-primary" type="submit">Rechercher</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <?php require_once 'stop_html.php' ?>
