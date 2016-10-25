@@ -1,11 +1,11 @@
 <?php require_once 'start_html.php' ?>
 
-<pre>
-    <?php var_dump($character['stats']) ?>
-</pre>
+<!-- <pre>
+    <?php var_dump($character['items']) ?>
+</pre> -->
 
-<div class="row">
-    <div class="col-md-12">
+<div class="row character-header-row">
+    <div class="col-md-8">
         <div class="well">
             <table>
                 <tbody>
@@ -27,12 +27,46 @@
             </table>
         </div>
     </div>
-</div>
 
-<div class="row">
     <div class="col-md-4">
         <div class="well">
-            <table class="table">
+            <table class="table table-condensed character-ressources-table">
+                <tbody>
+                    <tr>
+                        <td width="100px">
+                            <span>Level</span>
+                        </td>
+                        <td>
+                            <div class="progress character-ilvl-progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                    <?php echo $character['level'] ?>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="100px">
+                            <span>iLvl</span>
+                        </td>
+                        <td>
+                            <div class="progress character-ilvl-progress">
+                                <div class="progress-bar <?php echo 'power-' . $character['stats']['powerType'] ?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                    <?php echo $character['items']['averageItemLevelEquipped'] ?>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row character-stats-row">
+    <div class="col-md-4">
+        <div class="well">
+            <table class="table table-condensed character-ressources-table">
                 <tbody>
                     <tr>
                         <td width="100px">
@@ -40,7 +74,7 @@
                         </td>
                         <td>
                             <div class="progress character-ilvl-progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                <div class="progress-bar power-health" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
                                     <?php echo $character['stats']['health'] ?>
                                 </div>
                             </div>
@@ -53,7 +87,7 @@
                         </td>
                         <td>
                             <div class="progress character-ilvl-progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                <div class="progress-bar <?php echo 'power-' . $character['stats']['powerType'] ?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
                                     <?php echo $character['stats']['power'] ?>
                                 </div>
                             </div>
@@ -66,93 +100,13 @@
 
     <div class="col-md-4">
         <div class="well">
-            <table class="table table-condensed character-stats-table">
-                <tbody>
-                    <tr>
-                        <td>
-                            <span>Force</span>
-                        </td>
-
-                        <td>
-                            <span><?php echo $character['stats']['str'] ?></span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span>Agilité</span>
-                        </td>
-
-                        <td>
-                            <span><?php echo $character['stats']['agi'] ?></span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span>Intelligence</span>
-                        </td>
-
-                        <td>
-                            <span><?php echo $character['stats']['int'] ?></span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span>Endurance</span>
-                        </td>
-
-                        <td>
-                            <span><?php echo $character['stats']['sta'] ?></span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <?php echo html_primary_stats($character) ?>
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="well">
-            <table class="table table-condensed character-stats-table">
-                <tbody>
-                    <tr>
-                        <td>
-                            <span>Critique</span>
-                        </td>
-                        <td>
-                            <span><?php echo round($character['stats']['crit'], 2) ?> %</span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span>Hâte</span>
-                        </td>
-                        <td>
-                            <span><?php echo round($character['stats']['haste'], 2) ?> %</span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span>Maitrise</span>
-                        </td>
-                        <td>
-                            <span><?php echo round($character['stats']['mastery'], 2) ?> %</span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span>Polyvalence</span>
-                        </td>
-                        <td>
-                            <span><?php echo round($character['stats']['versatilityDamageDoneBonus'], 2) ?> %</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <?php echo html_secondary_stats($character) ?>
         </div>
     </div>
 </div>
@@ -172,3 +126,67 @@
 </div>
 
 <?php require_once 'stop_html.php' ?>
+
+<?php
+
+function html_primary_stats($character) {
+    $primary_stats = array (
+        'str' => 'Force',
+        'agi' => 'Agilité',
+        'int' => 'Intelligence',
+        'sta' => 'Endurance',
+    );
+
+    $html = '';
+
+    $html.= '<table class="table table-condensed character-stats-table">';
+    $html.=     '<tbody>';
+
+    foreach ($primary_stats as $stats => $stats_label) {
+        $html.=     '<tr>';
+        $html.=         '<td>';
+        $html.=             '<span>' . $stats_label . '</span>';
+        $html.=         '</td>';
+
+        $html.=         '<td class="text-right">';
+        $html.=             '<span>' . $character['stats'][$stats] . '</span>';
+        $html.=         '</td>';
+        $html.=     '</tr>';
+    }
+
+    $html.=     '</tbody>';
+    $html.= ' </table>';
+
+    return $html;
+}
+
+function html_secondary_stats($character) {
+    $secondary_stats = array (
+        'crit'                       => 'Critique',
+        'haste'                      => 'Hâte',
+        'mastery'                    => 'Maitrise',
+        'versatilityDamageDoneBonus' => 'Polyvalence',
+    );
+
+    $html = '';
+
+    $html.= '<table class="table table-condensed character-stats-table">';
+    $html.=     '<tbody>';
+
+    foreach ($secondary_stats as $stats => $stats_label) {
+        $html.=     '<tr>';
+        $html.=         '<td>';
+        $html.=             '<span>' . $stats_label . '</span>';
+        $html.=         '</td>';
+
+        $html.=         '<td class="text-right">';
+        $html.=             '<span>' . round($character['stats'][$stats], 2) . ' %</span>';
+        $html.=         '</td>';
+        $html.=     '</tr>';
+    }
+
+    $html.=     '</tbody>';
+    $html.= ' </table>';
+
+    return $html;
+}

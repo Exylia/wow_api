@@ -99,6 +99,31 @@ body {
     color: rgb(163, 53, 238);
 }
 
+.power-health {
+    background-color: #258500;
+}
+
+.power-maelstrom,
+.power-focus {
+    background-color: #BC5A00;
+}
+
+.power-pain {
+    background-color: #C001D6;
+}
+
+.power-runic {
+    background-color: #00B2D2;
+}
+
+.power-mana {
+    background-color: #1281FF;
+}
+
+.power-rage {
+    background-color: #B60000;
+}
+
 .character-thumbnail {
     margin-right: 20px;
 }
@@ -111,8 +136,30 @@ body {
     font-size: 18px;
 }
 
-.character-stats-table {
+.character-header-row .well {
+    height: 130px;
+}
+
+.character-stats-row .well {
+    height: 164px;
+}
+
+.character-stats-table,
+.character-ressources-table {
     margin-bottom: 0px;
+}
+
+.character-stats-table > tbody > tr > td,
+.character-ressources-table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.character-ressources-table {
+    height : 100%;
+}
+
+.character-ressources-table .progress {
+    margin: 0px;
 }
 
 .character-ilvl-progress {
