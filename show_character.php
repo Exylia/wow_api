@@ -22,6 +22,14 @@ if (!empty($_GET)) {
             exit;
         }
 
+        $labels = array();
+        $datas = array();
+
+        foreach ($character['progression']['raids'][35]['bosses'] as $boss) {
+            $labels[] = $boss['name'];
+            $datas[] = $boss['normalKills'];
+        }
+
         require_once 'view/show_character.phtml';
     }
 }

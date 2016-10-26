@@ -1,8 +1,8 @@
 <?php require_once 'start_html.php' ?>
 
-<!-- <pre>
-    <?php var_dump($character['items']) ?>
-</pre> -->
+<pre>
+    <?php var_dump($character['progression']['raids'][35]['bosses']) ?>
+</pre>
 
 <div class="row character-header-row">
     <div class="col-md-8">
@@ -113,8 +113,10 @@
 
 <div class="row">
     <div class="col-md-6">
-        <div class="well">
-            <span>Graph kill boss raid 1</span>
+        <div class="well" id="graph_1">
+            <div id="parent">
+                <canvas id="myChart" width="100%" height="200"></canvas>
+            </div>
         </div>
     </div>
 
@@ -124,6 +126,49 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        var canvas = document.getElementById("myChart");
+        var parent = document.getElementById("parent");
+        var ctx = canvas.getContext("2d");
+
+        canvas.width = parent.offsetWidth;
+        canvas.height = parent.offsetHeight;
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            },
+            data: {
+                labels: <?php echo json_encode($labels, true) ?>,
+                datasets: [{
+                    label: '# of kill',
+                    data: <?php echo json_encode($datas, true) ?>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
 
 <?php require_once 'stop_html.php' ?>
 

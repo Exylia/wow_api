@@ -29,7 +29,7 @@ function getCharacterAchievements($server, $character_name)
 function getCharacterAllInformations($server, $character_name)
 {
     $method = 'GET';
-    $url = 'https://eu.api.battle.net/wow/character/' . $server . '/' . $character_name . '?fields=stats,items&local=' . CFG_LOCAL . '&apikey=' . CFG_API_KEY;
+    $url = 'https://eu.api.battle.net/wow/character/' . $server . '/' . $character_name . '?fields=stats,items,progression&local=' . CFG_LOCAL . '&apikey=' . CFG_API_KEY;
 
     $response = sendRestRequest($method, $url);
 
