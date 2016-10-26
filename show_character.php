@@ -23,11 +23,15 @@ if (!empty($_GET)) {
         }
 
         $labels = array();
-        $datas = array();
+        $datas_nm = array();
+        $datas_hm = array();
+        $datas_mm = array();
 
         foreach ($character['progression']['raids'][35]['bosses'] as $boss) {
             $labels[] = $boss['name'];
-            $datas[] = $boss['normalKills'];
+            $datas_nm[] = $boss['normalKills'];
+            $datas_hm[] = $boss['heroicKills'];
+            $datas_mm[] = $boss['mythicKills'];
         }
 
         require_once 'view/show_character.phtml';
