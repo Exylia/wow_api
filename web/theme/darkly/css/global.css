@@ -171,3 +171,15 @@ body {
     line-height: 20px;
     font-size: 14px;
 }
+
+#myChart {
+    width: 100% !important;
+}
+
+@import 'https://code.highcharts.com/css/highcharts.css';
+
+
+.highcharts-title {
+    color: white ;
+    fill:white;
+}

@@ -1,7 +1,7 @@
 <?php require_once 'start_html.php' ?>
 
 <pre>
-    <?php var_dump($character['progression']['raids'][35]['bosses']) ?>
+    <?php var_dump($character) ?>
 </pre>
 
 <div class="row character-header-row">
@@ -11,16 +11,16 @@
                 <tbody>
                     <tr>
                         <td rowspan="2">
-                            <img class="img-thumbnail character-thumbnail" src="http://render-api-eu.worldofwarcraft.com/static-render/eu/<?php echo $character['thumbnail'] ?>" />
+                            <img class="img-thumbnail character-thumbnail" src="http://render-api-eu.worldofwarcraft.com/static-render/eu/<?= $character['thumbnail'] ?>" />
                         </td>
 
                         <td>
-                            <span class="character-name"><?php echo $character['name'] ?></span>
+                            <span class="character-name"><?= $character['name'] ?></span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span class="character-guild"><?php echo $character['name'] ?></span>
+                            <span class="character-guild"><?= $character['name'] ?></span>
                         </td>
                     </tr>
                 </tbody>
@@ -39,7 +39,7 @@
                         <td>
                             <div class="progress character-ilvl-progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                    <?php echo $character['level'] ?>
+                                    <?= $character['level'] ?>
                                 </div>
                             </div>
                         </td>
@@ -51,8 +51,8 @@
                         </td>
                         <td>
                             <div class="progress character-ilvl-progress">
-                                <div class="progress-bar <?php echo 'power-' . $character['stats']['powerType'] ?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                    <?php echo $character['items']['averageItemLevelEquipped'] ?>
+                                <div class="progress-bar <?= 'power-' . $character['stats']['powerType'] ?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                    <?= $character['items']['averageItemLevelEquipped'] ?>
                                 </div>
                             </div>
                         </td>
@@ -75,7 +75,7 @@
                         <td>
                             <div class="progress character-ilvl-progress">
                                 <div class="progress-bar power-health" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                    <?php echo $character['stats']['health'] ?>
+                                    <?= $character['stats']['health'] ?>
                                 </div>
                             </div>
                         </td>
@@ -83,12 +83,12 @@
 
                     <tr>
                         <td width="100px">
-                            <span><?php echo $character['stats']['powerType'] ?></span>
+                            <span><?= $character['stats']['powerType'] ?></span>
                         </td>
                         <td>
                             <div class="progress character-ilvl-progress">
-                                <div class="progress-bar <?php echo 'power-' . $character['stats']['powerType'] ?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                    <?php echo $character['stats']['power'] ?>
+                                <div class="progress-bar <?= 'power-' . $character['stats']['powerType'] ?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                    <?= $character['stats']['power'] ?>
                                 </div>
                             </div>
                         </td>
@@ -100,13 +100,13 @@
 
     <div class="col-md-4">
         <div class="well">
-            <?php echo html_primary_stats($character) ?>
+            <?= html_primary_stats($character) ?>
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="well">
-            <?php echo html_secondary_stats($character) ?>
+            <?= html_secondary_stats($character) ?>
         </div>
     </div>
 </div>
@@ -114,9 +114,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="well" id="graph_1">
-            <div id="parent">
-                <canvas id="myChart" width="100%" height="200"></canvas>
-            </div>
+            <span>Graph kill boss raid 1</span>
         </div>
     </div>
 
@@ -128,48 +126,50 @@
 </div>
 
 <script>
-    $(function() {
-        var canvas = document.getElementById("myChart");
-        var parent = document.getElementById("parent");
-        var ctx = canvas.getContext("2d");
+    $(function () {
+        $('#graph_1').highcharts({
 
-        canvas.width = parent.offsetWidth;
-        canvas.height = parent.offsetHeight;
-
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
+            chart: {
+                type: 'column',
             },
-            data: {
-                labels: <?php echo json_encode($labels, true) ?>,
-                datasets: [
-                    {
-                        label: '# of kill NM',
-                        data: <?php echo json_encode($datas_nm, true) ?>,
-                        backgroundColor: 'rgba(255, 99, 132, 1)',
-                    }, {
-                        label: '# of kill HM',
-                        data: <?php echo json_encode($datas_hm, true) ?>,
-                        backgroundColor: 'rgba(54, 162, 235, 1)',
-                    }, {
-                        label: '# of kill MM',
-                        data: <?php echo json_encode($datas_mm, true) ?>,
-                        backgroundColor: 'rgba(54, 162, 235, 1)',
-                    },
 
-                ],
+            title: {
+                text: 'Cauchemar d\'émeraude',
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
+
+            xAxis: {
+                categories: <?= json_encode($labels) ?>,
+            },
+
+            yAxis: {
+                allowDecimals: false,
+                min: 0,
+                title: {
+                    text: 'Number of kill'
                 }
-            }
+            },
+
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.x + '</b><br/>' +
+                        this.series.name + ': ' + this.y + '<br/>';
+                }
+            },
+
+            series: [{
+                name: 'NM',
+                data: <?= json_encode($datas_nm) ?>,
+            }, {
+                name: 'HM',
+                data: <?= json_encode($datas_hm) ?>,
+            }, {
+                name: 'MM',
+                data: <?= json_encode($datas_mm) ?>,
+            }],
+
+            credits: {
+                   enabled: false,
+            },
         });
     });
 </script>
