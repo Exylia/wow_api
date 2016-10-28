@@ -1,8 +1,8 @@
 <?php require_once 'start_html.php' ?>
 
-<pre>
+<!-- <pre>
     <?php var_dump($character) ?>
-</pre>
+</pre> -->
 
 <div class="row character-header-row">
     <div class="col-md-8">
@@ -112,67 +112,76 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">
-        <div class="well" id="graph_1">
-            <span>Graph kill boss raid 1</span>
+    <?php foreach ($raid_progress as $idx => $raid) : ?>
+        <div class="col-md-6">
+            <div class="well" id="graph_<?= $idx ?>" style="height:300px"></div>
         </div>
-    </div>
 
-    <div class="col-md-6">
-        <div class="well">
-            <span>Graph kill boss raid 2</span>
-        </div>
-    </div>
+        <script>
+            $(function () {
+                $('#graph_<?= $idx ?>').highcharts({
+
+                    chart: {
+                        type: 'column',
+                    },
+
+                    title: {
+                        text: '<?= $raid['name'] ?>',
+                    },
+
+                    xAxis: {
+                        categories: <?= json_encode($raid['bosses']) ?>,
+                        labels: {
+                            autoRotation: 0,
+                        },
+                    },
+
+                    yAxis: {
+                        allowDecimals: false,
+                        tickInterval: <?= floor((max($raid['kill']['NM'] + $raid['kill']['HM'] + $raid['kill']['MM'])) / 10) + 1 ?>, // 1 si < 10 , 2 < 20 etc...
+                        min: 0,
+                        max: <?= max($raid['kill']['NM'] + $raid['kill']['HM'] + $raid['kill']['MM']) ?>,
+                        endOnTick: false,
+                        title: {
+                            text: 'Number of kill'
+                        },
+                    },
+
+                    tooltip: {
+                        formatter: function () {
+                            return '<b>' + this.x + '</b><br/>' +
+                                this.series.name + ': ' + this.y + '<br/>';
+                        }
+                    },
+
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                        },
+                    },
+
+                    series: [{
+                        name: 'NM',
+                        data: <?= json_encode($raid['kill']['NM']) ?>,
+                        color: 'rgba(30, 255, 0, 1)',
+                    }, {
+                        name: 'HM',
+                        data: <?= json_encode($raid['kill']['HM']) ?>,
+                        color: 'rgba(0, 112, 255, 1)',
+                    }, {
+                        name: 'MM',
+                        data: <?= json_encode($raid['kill']['MM']) ?>,
+                        color: 'rgba(163, 53, 238, 1)',
+                    }],
+
+                    credits: {
+                           enabled: false,
+                    },
+                });
+            });
+        </script>
+    <?php endforeach; ?>
 </div>
-
-<script>
-    $(function () {
-        $('#graph_1').highcharts({
-
-            chart: {
-                type: 'column',
-            },
-
-            title: {
-                text: 'Cauchemar d\'émeraude',
-            },
-
-            xAxis: {
-                categories: <?= json_encode($labels) ?>,
-            },
-
-            yAxis: {
-                allowDecimals: false,
-                min: 0,
-                title: {
-                    text: 'Number of kill'
-                }
-            },
-
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.x + '</b><br/>' +
-                        this.series.name + ': ' + this.y + '<br/>';
-                }
-            },
-
-            series: [{
-                name: 'NM',
-                data: <?= json_encode($datas_nm) ?>,
-            }, {
-                name: 'HM',
-                data: <?= json_encode($datas_hm) ?>,
-            }, {
-                name: 'MM',
-                data: <?= json_encode($datas_mm) ?>,
-            }],
-
-            credits: {
-                   enabled: false,
-            },
-        });
-    });
-</script>
 
 <?php require_once 'stop_html.php' ?>
 

@@ -16,4 +16,10 @@ $page_no_connect = array(
 	'login.php',
 );
 
+// Raid to show on character page
+$cfg_current_raid = array(
+    35, // Emerald Nightmare
+    37, // Trial of Valor
+);
+
 ?>

@@ -22,16 +22,20 @@ if (!empty($_GET)) {
             exit;
         }
 
-        $labels = array();
-        $datas_nm = array();
-        $datas_hm = array();
-        $datas_mm = array();
+        $raid_progress = array();
 
-        foreach ($character['progression']['raids'][35]['bosses'] as $boss) {
-            $labels[] = $boss['name'];
-            $datas_nm[] = $boss['normalKills'];
-            $datas_hm[] = $boss['heroicKills'];
-            $datas_mm[] = $boss['mythicKills'];
+        // For each raid in config
+        foreach($cfg_current_raid as $raid_id) {
+
+            $raid_progress[$raid_id]['name'] = $character['progression']['raids'][$raid_id]['name']; // Name of raid
+
+            // For each boss in the current raid
+            foreach ($character['progression']['raids'][$raid_id]['bosses'] as $boss) {
+                $raid_progress[$raid_id]['bosses'][] = $boss['name'];                       // Boss name
+                $raid_progress[$raid_id]['kill']['NM'][] = $boss['normalKills'];            // Number of kill NM
+                $raid_progress[$raid_id]['kill']['HM'][] = $boss['heroicKills'];            // Number of kill HM
+                $raid_progress[$raid_id]['kill']['MM'][] = $boss['mythicKills'];            // Number of kill MM
+            }
         }
 
         require_once 'view/show_character.phtml';
