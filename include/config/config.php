@@ -11,6 +11,9 @@ define('CFG_TABLE_ROSTER',           'roster'); // Table des rosters
 define('CFG_TABLE_ROSTER_CHARACTER', 'roster_character');
 define('CFG_TABLE_ROSTER_USER',      'roster_user');
 
+define('CFG_TABLE_WARCRAFTLOG_ZONE', 'warcraftlog_zone');
+define('CFG_TABLE_WARCRAFTLOG_ENCOUNTER', 'warcraftlog_encounter');
+
 $page_no_connect = array(
 	'signup.php',
 	'login.php',

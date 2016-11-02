@@ -15,6 +15,7 @@ require_once 'config/navigation.php';
 require_once 'lib/global_lib.php';
 require_once 'lib/lib_form.php';
 require_once 'lib/wow_api/wow_api_loader.php';
+require_once 'lib/warcraftlog_api/warcraftlog_api.php';
 
 if (file_exists('local_lib.php')) {
     require 'local_lib.php';
