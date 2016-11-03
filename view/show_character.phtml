@@ -183,6 +183,78 @@
     <?php endforeach; ?>
 </div>
 
+<div class="row">
+    <?php foreach ($ranking as $idx2 => $raid) : ?>
+        <div class="col-md-6">
+            <div class="well" id="graph_<?= $idx2 ?>" style="height:300px"></div>
+        </div>
+
+        <script>
+            $(function () {
+                $('#graph_<?= $idx2 ?>').highcharts({
+
+                    chart: {
+                        type: 'column',
+                    },
+
+                    title: {
+                        text: '<?= $raid['name'] ?>',
+                    },
+
+                    xAxis: {
+                        categories: <?= json_encode(array_values($raid['bosses'])) ?>,
+                        labels: {
+                            autoRotation: 0,
+                        },
+                    },
+
+                    yAxis: {
+                        allowDecimals: false,
+
+                        min: 0,
+                        max: <?= max($raid['dps']['NM'] + $raid['dps']['HM'] + $raid['dps']['MM']) ?>,
+                        endOnTick: false,
+                        title: {
+                            text: 'Number of kill'
+                        },
+                    },
+
+                    tooltip: {
+                        formatter: function () {
+                            return '<b>' + this.x + '</b><br/>' +
+                                this.series.name + ': ' + this.y + '<br/>';
+                        }
+                    },
+
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                        },
+                    },
+
+                    series: [{
+                        name: 'NM',
+                        data: <?= json_encode(array_values($raid['dps']['NM'])) ?>,
+                        color: 'rgba(30, 255, 0, 1)',
+                    }, {
+                        name: 'HM',
+                        data: <?= json_encode(array_values($raid['dps']['HM'])) ?>,
+                        color: 'rgba(0, 112, 255, 1)',
+                    }, {
+                        name: 'MM',
+                        data: <?= json_encode(array_values($raid['dps']['MM'])) ?>,
+                        color: 'rgba(163, 53, 238, 1)',
+                    }],
+
+                    credits: {
+                           enabled: false,
+                    },
+                });
+            });
+        </script>
+    <?php endforeach; ?>
+</div>
+
 <?php require_once 'stop_html.php' ?>
 
 <?php

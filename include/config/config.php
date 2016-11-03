@@ -25,4 +25,9 @@ $cfg_current_raid = array(
     37, // Trial of Valor
 );
 
+$cfg_warcraftlog_raid = array(
+    10, // Emerald Nightmare
+    12, // Trial of Valor
+);
+
 ?>
