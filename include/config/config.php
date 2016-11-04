@@ -14,6 +14,9 @@ define('CFG_TABLE_ROSTER_USER',      'roster_user');
 define('CFG_TABLE_WARCRAFTLOG_ZONE', 'warcraftlog_zone');
 define('CFG_TABLE_WARCRAFTLOG_ENCOUNTER', 'warcraftlog_encounter');
 
+define('CFG_TABLE_BLIZZARD_ZONE', 'blizzard_zone');
+define('CFG_TABLE_BLIZZARD_ENCOUNTER', 'blizzard_encounter');
+
 $page_no_connect = array(
 	'signup.php',
 	'login.php',
@@ -21,8 +24,8 @@ $page_no_connect = array(
 
 // Raid to show on character page
 $cfg_current_raid = array(
-    35, // Emerald Nightmare
-    37, // Trial of Valor
+    8026, // Emerald Nightmare
+    8440, // Trial of Valor
 );
 
 $cfg_warcraftlog_raid = array(

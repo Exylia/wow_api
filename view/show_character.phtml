@@ -140,7 +140,11 @@
                         allowDecimals: false,
                         tickInterval: <?= floor((max($raid['kill']['NM'] + $raid['kill']['HM'] + $raid['kill']['MM'])) / 10) + 1 ?>, // 1 si < 10 , 2 < 20 etc...
                         min: 0,
-                        max: <?= max($raid['kill']['NM'] + $raid['kill']['HM'] + $raid['kill']['MM']) ?>,
+                        max: <?= max(array(
+                                max($raid['kill']['NM']),
+                                max($raid['kill']['HM']),
+                                max($raid['kill']['MM']),
+                            )); ?>,
                         endOnTick: false,
                         title: {
                             text: 'Number of kill'
@@ -210,12 +214,16 @@
 
                     yAxis: {
                         allowDecimals: false,
-
+                        tickInterval: 50000,
                         min: 0,
-                        max: <?= max($raid['dps']['NM'] + $raid['dps']['HM'] + $raid['dps']['MM']) ?>,
+                        max: <?= max(array(
+                                max($raid['dps']['NM']),
+                                max($raid['dps']['HM']),
+                                max($raid['dps']['MM']),
+                            )); ?>,
                         endOnTick: false,
                         title: {
-                            text: 'Number of kill'
+                            text: 'Damage Per Second',
                         },
                     },
 

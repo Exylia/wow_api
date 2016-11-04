@@ -13,7 +13,7 @@ if (!empty($_GET)) {
 
     if (empty($error)) {
         // Recuperation des informations du personnage
-        $character = (array) getCharacterAllInformations($_GET['realm'], $_GET['name']);
+        $character = getCharacter($_GET['realm'], $_GET['name']);
 
         if (!empty($character['status']) && $character['status'] === 'nok') {
             $error['all'] = "Personnage introuvable";
@@ -63,13 +63,6 @@ if (!empty($_GET)) {
                 $ranking[$row['zone_id']]['dps']['MM'][$row['encounter_id']] = !empty($tmp[$row['encounter_id']][5]['total']) ? $tmp[$row['encounter_id']][5]['total'] : 0;
             }
         }
-
-
-
-        echo '<pre>';
-        var_dump($ranking);
-        // var_dump($raid_ranking);
-        echo '</pre>';
 
         require_once 'view/show_character.phtml';
     }
