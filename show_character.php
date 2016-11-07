@@ -24,6 +24,10 @@ if (!empty($_GET)) {
 
         $raid_progress = array();
 
+        echo '<pre>';
+        var_dump($character['progression']['raids']);
+        echo '</pre>';
+
         // For each raid in config
         foreach ($cfg_current_raid as $raid_id) {
 
@@ -47,20 +51,27 @@ if (!empty($_GET)) {
 
         $ranking = array();
 
-        foreach ($cfg_warcraftlog_raid as $raid_id) {
-            $sql = 'SELECT E.encounter_id, E.zone_id, E.name as boss_name, Z.name as zone_name FROM ' . CFG_TABLE_WARCRAFTLOG_ENCOUNTER . ' E ';
-            $sql.= 'LEFT JOIN ' . CFG_TABLE_WARCRAFTLOG_ZONE . ' Z ON E.zone_id = Z.zone_id ';
+        foreach ($cfg_current_raid as $raid_id) {
+            $sql = 'SELECT
+                E.encounter_id,
+                Z.zone_id,
+                E.warcraftlog_id as warcraftlog_encounter_id,
+                Z.warcraftlog_id as warcraftlog_zone_id,
+                E.name as boss_name,
+                Z.name as zone_name ';
+            $sql.= 'FROM ' . CFG_TABLE_BLIZZARD_ENCOUNTER . ' E ';
+            $sql.= 'LEFT JOIN ' . CFG_TABLE_BLIZZARD_ZONE . ' Z ON E.zone_id = Z.zone_id ';
             $sql.= 'WHERE ';
-            $sql.= 'E.zone_id = ' . $pdo->quote($raid_id);
+            $sql.= 'Z.zone_id = ' . $pdo->quote($raid_id);
 
             $res = $pdo->query($sql);
 
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                 $ranking[$row['zone_id']]['name'] = $row['zone_name'];
                 $ranking[$row['zone_id']]['bosses'][$row['encounter_id']] = $row['boss_name'];
-                $ranking[$row['zone_id']]['dps']['NM'][$row['encounter_id']] = !empty($tmp[$row['encounter_id']][3]['total']) ? $tmp[$row['encounter_id']][3]['total'] : 0;
-                $ranking[$row['zone_id']]['dps']['HM'][$row['encounter_id']] = !empty($tmp[$row['encounter_id']][4]['total']) ? $tmp[$row['encounter_id']][4]['total'] : 0;
-                $ranking[$row['zone_id']]['dps']['MM'][$row['encounter_id']] = !empty($tmp[$row['encounter_id']][5]['total']) ? $tmp[$row['encounter_id']][5]['total'] : 0;
+                $ranking[$row['zone_id']]['dps']['NM'][$row['encounter_id']] = !empty($tmp[$row['warcraftlog_encounter_id']][3]['total']) ? $tmp[$row['warcraftlog_encounter_id']][3]['total'] : 0;
+                $ranking[$row['zone_id']]['dps']['HM'][$row['encounter_id']] = !empty($tmp[$row['warcraftlog_encounter_id']][4]['total']) ? $tmp[$row['warcraftlog_encounter_id']][4]['total'] : 0;
+                $ranking[$row['zone_id']]['dps']['MM'][$row['encounter_id']] = !empty($tmp[$row['warcraftlog_encounter_id']][5]['total']) ? $tmp[$row['warcraftlog_encounter_id']][5]['total'] : 0;
             }
         }
 

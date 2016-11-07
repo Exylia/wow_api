@@ -114,12 +114,12 @@
 <div class="row">
     <?php foreach ($raid_progress as $idx => $raid) : ?>
         <div class="col-md-6">
-            <div class="well" id="graph_<?= $idx ?>" style="height:300px"></div>
+            <div class="well" id="graph_kill_<?= $idx ?>" style="height:300px"></div>
         </div>
 
         <script>
             $(function () {
-                $('#graph_<?= $idx ?>').highcharts({
+                $('#graph_kill_<?= $idx ?>').highcharts({
 
                     chart: {
                         type: 'column',
@@ -190,12 +190,12 @@
 <div class="row">
     <?php foreach ($ranking as $idx2 => $raid) : ?>
         <div class="col-md-6">
-            <div class="well" id="graph_<?= $idx2 ?>" style="height:300px"></div>
+            <div class="well" id="graph_dps_<?= $idx2 ?>" style="height:300px"></div>
         </div>
 
         <script>
             $(function () {
-                $('#graph_<?= $idx2 ?>').highcharts({
+                $('#graph_dps_<?= $idx2 ?>').highcharts({
 
                     chart: {
                         type: 'column',
